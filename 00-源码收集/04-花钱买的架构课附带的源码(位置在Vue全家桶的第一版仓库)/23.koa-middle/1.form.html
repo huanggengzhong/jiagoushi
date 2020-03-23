@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    文件上传 <input type="file" id="input">
+    <button id="btn">提交</button>
+    <script>
+        // 分片上传 + 断点续传
+        let file; // 这个是当前上传的文件
+        let size = 10*1024*1024 // 每个分片都是10m大小
+        let num = 0; // 默认从第0片开始
+        let filename;// 文件名
+        let totalsize; // 总大小
+        let count; // 当前分段数量
+        input.addEventListener('change',(e)=>{
+            file = e.target.files[0]
+            // file类型是一个二进制格式 blob
+            filename = file.name; // 当前选择的文件名
+            totalsize = file.size;
+            count = Math.ceil(totalsize / size)
+        });
+        // 并发上传 、 第一个完事传第2个
+        function upload(){ // 上传文件  101 10 1 
+            console.log(num);
+            let min = Math.min(size,totalsize-num*size); // 要最后拆分多少
+            if(min >=0){ // 如果数据都传递完成了那就不要在继续分片了
+                let fd = new FormData(); // 创建二进制传输的格式
+                fd.append('chunkNum',num); // 上传的标号
+                fd.append('count',count); // 分片的总个数
+                fd.append('filename',filename); // 最后文件的名字 （后缀）
+                fd.append('chunk',file.slice(num*size,num*size+min)); // 每次需要上传的内容
+                uplpadFile(fd);
+                num++;
+                upload();
+            }
+        }
+        function uplpadFile(fd){
+            let xhr = new XMLHttpRequest();
+            xhr.open('post','/upload',true);
+            xhr.upload.onprogress = function(e){
+               console.log(e.loaded/ e.total);
+            }
+            xhr.onload = function(){}
+            xhr.send(fd)
+        }
+        btn.addEventListener('click',function(){
+            upload();
+        });
+    </script>
+</body>
+</html>

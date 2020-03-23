@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-button :msg="1" username="zhufeng" ></my-button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    
+    <script>
+        //  v-bind  v-on  $attrs $listeners
+        //  $parent $children
+        Vue.component('my-button',{
+            props:{
+                msg:{
+                    type:Number, // 校验类型
+                    default:100, 
+                    //required:true // 必须填写
+                },
+                arr:{ // 对象和数组默认值必须通过函数返回
+                    type:[Array,Object], // 类型校验
+                    default:()=>[1,2,3] // 默认值
+                },
+                username:{
+                    type:String,
+                    validator(value){ // 自定义校验器
+                        return value.length == 7
+                    }
+                }
+            },
+            template:`<div><button>{{msg}} {{arr}}</button></div>`
+        })
+        let vm = new Vue({ 
+            el:'#app',
+           
+        });
+    </script>
+</body>
+</html>

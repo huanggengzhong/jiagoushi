@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    hello
+
+    <script>
+        // axios 和 fetch 共同点 都是基于promise，fetch是浏览器提供的
+        // 在浏览器中使用多线程 工作线程没有xhr对象的  支持fetch api
+        let xhr = new XMLHttpRequest();
+        document.cookie = 'age=xxxx'
+        xhr.withCredentials = true; // 强制跨域携带cookie
+        xhr.open('delete','http://localhost:3000/user',true);
+        xhr.setRequestHeader('Authorization',1)
+        xhr.responseType = 'json'; // 告诉服务器 返回的是一个json对象
+        // 进度条 xhr.onprogress
+        xhr.onload = function(){ // xhr.status == 200 xhr.readState ==4 
+            console.log(xhr.response)
+        }
+        xhr.send();
+    </script>
+</body>
+</html>

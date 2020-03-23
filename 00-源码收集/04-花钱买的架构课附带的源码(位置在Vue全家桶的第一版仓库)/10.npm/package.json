@@ -1,0 +1,18 @@
+{
+  "name": "handsome-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "useA.js",
+  "bin": {
+    "handsome": "./entry.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jquery": "^3.3.1"
+  }
+}

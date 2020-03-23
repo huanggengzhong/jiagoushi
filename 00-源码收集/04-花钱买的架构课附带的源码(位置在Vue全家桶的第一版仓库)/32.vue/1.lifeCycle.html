@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">{{a}}</div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                a:'hello'
+            },
+            beforeCreate(){ // 钩子函数 在newVue的时候 会最先调用，这个钩子 一般不会做太多功能，底层中可以做一些链
+               console.log(this); // 会初始化自己的生命周期，事件方法 $on $emit
+            },
+            created(){ // 响应式的数据变化观察 this.$el
+                console.log(this.$el); // 无法获取真实dom元素的
+            },
+            // template:`<div>hello123</div>`, // vue-cli 
+            // render(createElement){ // 像react,虚拟dom 就是一个对象
+            //     return createElement('div',{
+            //         attrs:{
+            //             id:1
+            //         },
+            //         on:{
+            //             click(){
+            //                 alert(1)
+            //             }
+            //         }
+            //     },'hello');
+            // },
+            beforeMount(){ // 这个方法基本用不到,检测有没有template属性,有的话会把这个template 渲染成一个render函数
+                console.log('beforeMount')
+            },
+            mounted(){ // 唯一的区别 这个里面可以获取真实的元素 this.$el
+                this.a = 'world';
+                this.$nextTick(()=>{ // promise.then,setImmediate,MutationObserver,setTiemout 
+                   alert(this.$el.innerHTML); // 只要操作dom 就增加$nextTick
+                })
+            },
+            // beforeUpdate(){ // 在更新的之前在做一次修改
+            //     this.a = 100;
+            // },
+            // updated(){ // 不能在修改值了,这个钩子不要更改数据，watch
+            //     console.log('更新后')
+            //     this.a = 500;
+            // },
+            beforeDestroy(){
+                console.log('销毁前'); // 一般情况下 用来清除定时器 移除绑定的方法事件
+            },
+            destroyed(){
+                console.log('销毁后')
+            }
+        });
+        //vm.$destroy();// activeted ...
+
+        // 当组件销毁的时候回触发，路由切换的时候，手动销毁
+    </script>
+</body>
+</html>

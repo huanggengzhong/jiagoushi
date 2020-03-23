@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-button :info="xxx" a="1" b="2" c="3"></my-button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                xxx:'xxx'
+            },
+            components:{
+                'my-button':{
+                    inheritAttrs:false, // 不在dom上显示传递的属性
+                    props:['info'],
+                    data(){ 
+                        return {msg:"点我啊"}
+                    },
+                     // this.$attrs 表示所有没有被用的属性,批量传递属性
+                    // mounted(){
+                    //     console.log(this.$attrs)
+                    // },  
+                    template:`<button>{{msg}}-{{info}}-<my v-bind="$attrs"></my></button>`,
+                    components:{
+                        'my':{
+                            props:['a','b','c'],
+                            mounted(){
+                                console.log(this.$attrs);
+                            },
+                            template:`<span>试试啊 {{a}} {{b}} {{c}}</span>`
+                        }
+                    }
+                }   
+            }
+        });
+    </script>
+</body>
+</html>

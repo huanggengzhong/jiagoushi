@@ -1,0 +1,26 @@
+ (function(modules) {
+ 	var installedModules = {};
+	function __webpack_require__(moduleId) { // ./src/test.js
+	
+ 		var module  = {
+ 			i: moduleId,
+ 			l: false,
+ 			exports: {} // exports = 'hello'
+ 		};
+
+ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+ 		module.l = true;
+
+ 		return module.exports;
+ 	}
+
+ 	return __webpack_require__("./src/test.js");
+ })
+ ({
+"./src/test.js":
+  (function(module, exports) {
+  eval("module.exports = 'hello';");
+  })
+ });
+ console.log(a);

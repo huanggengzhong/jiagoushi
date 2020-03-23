@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
+    <style>
+        .box{
+            background: red;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="filter">
+        <transition-group
+            enter-active-class="bounceIn"
+            leave-active-class="bounceOut"
+        >
+            <div class="box animated"  v-for="(d,index) in computedData" v-if="isShow" :key="d.title">
+                    {{d.title}}
+            </div>
+        </transition-group>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/velocity-animate/velocity.js"></script>
+    <script>
+        
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                isShow:true,
+                filter:'',
+                dataList:[
+                    {title:'标题1'},
+                    {title:'标题23'},{title:'标题33'},{title:'标题4'}
+                ]
+            },
+            computed:{
+                computedData(){
+                    return this.dataList.filter(item=>{
+                        // item 当前循环的每一项 看一下是否包含filter属性 如果包含就留下
+                        return item.title.includes(this.filter)
+                    })
+                }
+            }
+        });
+
+        // 生命周期
+        // 组件的通信 provide  ref  emit  props parent child  eventBus vuex ... 
+        // vue-cli 3.0 vue-router  vuex
+        // 封装组件
+        // iview element-ui cube-ui 
+        // nuxtjs vue-ssr
+        // 单元测试
+        // pwa 
+        // 项目实战 珠峰课堂 cube-ui + mongo + redis + koa + 全家桶
+        // vue-router 原理 vuex 原理
+        // 模板解析 （ast）+ 解析指令  + mvvm + update  dom-diff 写一个简板vue
+
+
+    </script>
+</body>
+</html>

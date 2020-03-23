@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    </div>
+    <script>
+        // vue 等待dom更新后 在取dom中的数据
+        setTimeout(()=>{
+            console.log('timeout');
+        });
+        let mutationObserver = new MutationObserver(()=>{
+            console.log(app.children.length); // 异步的
+        });
+        mutationObserver.observe(app,{childList:true})
+        for(let i = 0 ; i< 10; i++){
+            app.appendChild(document.createElement('p'))
+        }
+        for(let i = 0 ; i< 10; i++){
+            app.appendChild(document.createElement('p'))
+        }
+        for(let i = 0 ; i< 10; i++){
+            app.appendChild(document.createElement('p'))
+        }
+    </script>
+</body>
+</html>

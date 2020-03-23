@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+       <div id="app">
+           <!-- ref 的三种情况 如果给dom 就是一个dom 如果给 v-for 出来的就是数组 如果给组件 那就是组件的实例 -->
+            <div ref="div" v-for="i in 3"></div>
+            <parent ref="parent"></parent>
+        </div>
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <script>
+            Vue.component("parent",{
+              data(){
+                return {isShow:false}
+              },
+              methods:{
+                show(){
+                    this.isShow = true;
+                },
+                hide(){
+                    this.isShow = false;
+                }
+              },
+               template:`<div> <span v-if="isShow">parent</span> </div>`
+            });
+            let vm = new Vue({
+                el:'#app',
+                mounted() {
+                    console.log(this.$refs.div)
+                    this.$refs.parent.show();
+                    setTimeout(()=>{
+                        this.$refs.parent.hide();
+                    },1000)
+                },
+            })
+        </script>
+</body>
+</html>

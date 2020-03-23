@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-model 就是把value值绑定给元素 并且添加input时事件 -->
+        <!-- v-bind 只是动态绑定属性 -->
+        <!-- v-model 可以放到任何地方 -->
+        <!-- 
+            v-model v-bind v-on v-if else ....
+            如何自定义指令
+
+         -->
+        <input type="text" v-model="msg">
+        <input type="text" v-bind:value="msg" @input="change($event)">
+        {{msg}}
+        <br>
+        <!-- 复选框有两个值 true / false -->
+        <input type="checkbox" v-model="check"> {{check}}
+        <!-- 多个爱好  []-->
+        <br>
+        <input type="checkbox" v-model="checks" value="游泳">
+        <input type="checkbox" v-model="checks" value="健身">
+        <input type="checkbox" v-model="checks" value="吃饭"> {{checks}}
+        <!-- checkbox 需要给value的值 多个时候 -->
+        <br>
+        <!-- 实现radio的分组 也是通过这个v-model -->
+        男 <input type="radio" v-model="gender" value="男" > 女<input type="radio"  v-model="gender" value="女">
+
+        <!-- select -->
+        <select v-model="select" multiple>
+            <option value="111" disabled>请选择</option>
+            <option v-for="o in options" :value="o.id" :key="o.id">{{o.title}}</option>
+        </select>
+        {{select}}
+
+        <!-- textarea -> input v-model -->
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'hello',
+                check:true,
+                checks:[],
+                gender:'男',
+                select:[],
+                options:[
+                    {title:'数学',id:1},
+                    {title:'语文',id:2},
+                    {title:'英语',id:3}
+                ]
+            },
+            methods:{
+                change(e){
+                    this.msg = e.target.value
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "31.viue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "animate.css": "^3.7.0",
+    "moment": "^2.24.0",
+    "velocity-animate": "^2.0.5",
+    "vue": "^2.6.10"
+  }
+}

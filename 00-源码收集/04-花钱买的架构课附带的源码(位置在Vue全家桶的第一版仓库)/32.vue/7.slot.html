@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在html中不能给标签大写  属性名字必须用 - 这种方式转驼峰-->
+        <div id="app">
+           <list :arr="arr" v-slot:default="{v}"  >
+               <!-- slot slot-scope = v-slot -->
+              <div>{{vv}}</div>
+           </list>
+        </div>
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <script>
+            Vue.component('list',{
+                props:['arr'],
+                // 通过作用域插槽的方式 函数组件
+                template:`<ul> 
+                    <slot v-for="i in arr" :v="i" :q=1></slot>    
+                </ul>`
+            })
+            let vm = new Vue({ 
+                el:'#app',
+                data:{
+                    vv:1,
+                    arr:[1,2,3,4,5]
+                }
+            });
+        </script>
+</body>
+</html>

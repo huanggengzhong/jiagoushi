@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- mustache 可以做运算 取值 输出 三元 不能js写js语法-->
+    <!-- 只要使用vue的数据就需要先声明 在使用 -->
+    <div id="app">
+        {{msg}} {{1+1}} {{info.a}} {{ {} }}
+        {{flag?1:2}}  {{ (function(){return 100})() }}
+        {{msg+'123'}}
+    </div> 
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            data:{
+                info:{},
+                msg:'hello',
+                flag:true
+            }
+        });
+        vm.$mount('#app')
+        // 1.vm.$el 指代的就是当前的元素
+        // 2.vm.$nextTick 延迟执行 dom操作时必备
+        // 3.vm.$watch 监控数据变化
+        // 4.vm.$data 当前数据对象
+        // 5.vm.$options所有的选项
+        // 6.vm.$set
+        // 7.vm.$mount挂载  单元测试 在内存中挂载vue实例 此时只能用$mount属性
+        vm.$watch('msg',function (newVale,oldValue) { // 可以观察某个数据 发生变化后触发此函数
+            console.log(newVale,oldValue)
+        });
+        vm.msg = 'zf';
+        vm.msg = 'xxx'; // dom更新是异步的
+        vm.$nextTick(function () { 
+            console.log(vm.$el.innerHTML);
+        });
+    </script>
+</body>
+</html>

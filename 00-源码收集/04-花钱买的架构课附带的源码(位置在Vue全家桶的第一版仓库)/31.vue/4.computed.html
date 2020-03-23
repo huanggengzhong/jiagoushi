@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        {{fullName}} 
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // computed 和 method的区别 
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                firstName:'姜',
+                lastName:'文',
+                fullName:''
+            },
+            // 什么时候用watch 什么时候 用computed  简单的事件 数据变化就发送调用接口  watch.只是计算一个值的结果 就用computed
+            watch:{ // vm.$watch
+                firstName:{ //  写成对象的目的 为了可以传递参数 immediate deep {a:{a"1}}
+                    handler(newVal,oldValue){
+                        setTimeout(() => {
+                            this.fullName = this.firstName + this.lastName
+                        }, 1000);
+                    },
+                    immediate:true,
+                    deep:true // 只要属性发生变化 就会触发此函数 默认只监控一层
+                },
+                lastName:{
+                    handler(newVal,oldValue){
+                        this.fullName = this.firstName + this.lastName
+                    },
+                    immediate:true
+                },
+            },
+            // compouted 他是基于 Object.defineProperty  getter / setter
+            
+            // vuex 我们希望通过vuex来实现双向绑定 （全选，多选）
+            // input checkbox   checkbox checbox
+            computed:{ // computed会有缓存 如果依赖的数据不发生变化 不会重新执行方法
+                getName:{
+                    get(){
+                        return this.firstName + this.lastName
+                    },
+                    set(val){
+                        this.xx = val
+                    }
+                }
+            }
+            // methods:{
+            //     getName(){
+            //         console.log('123')
+            //         return this.firstName + this.lastName
+            //     }
+            // }
+
+            // data method watch computed
+        })
+    </script>
+</body>
+</html>

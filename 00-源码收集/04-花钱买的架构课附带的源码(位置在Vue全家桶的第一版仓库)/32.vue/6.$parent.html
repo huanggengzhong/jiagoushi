@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="app">
+            <panel>
+                <template #default1>
+                      123
+                </template>
+            </panel>
+        </div>
+        <script src="./node_modules/vue/dist/vue.js"></script>
+        <script>
+            // slot 插槽 slot默认值放在slot标签中 而且名字要对应上
+            // 名字 用#+ slot的名字 可以对应上name的名字
+            // 写组件希望在组件上扩展 作用域插槽 scope-slot
+            Vue.component('panel',{
+                template:`<div>
+                    hello 
+                    <slot name="default1">没对上</slot>
+                </div>`
+            })
+            let vm = new Vue({ 
+                el:'#app',
+            });
+        </script>
+</body>
+</html>

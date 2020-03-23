@@ -1,0 +1,1 @@
+console.log(require('crypto').createHmac('sha256','zf').update('zf').digest('base64'))

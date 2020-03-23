@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "co": "^4.6.0",
+    "koa": "^2.7.0",
+    "koa-better-body": "^3.0.4",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.1",
+    "mime": "^2.4.0",
+    "mz": "^2.7.0",
+    "uuid": "^3.3.2",
+    "vue": "^2.6.10"
+  },
+  "name": "201902_architecture_course",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://gitee.com/jw-speed/201902_architecture_course.git",
+  "author": "cindy <l>",
+  "license": "MIT"
+}

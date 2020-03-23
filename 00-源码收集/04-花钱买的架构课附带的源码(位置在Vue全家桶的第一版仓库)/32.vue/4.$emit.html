@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- .native 修饰符 相当于给组件的模板最外成添加事件 -->
+        <!-- my-button  this.$on('click',show)-->
+        <my-button @click="show" @mouseup="show"></my-button>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    
+    <script>
+        Vue.component('my-button',{
+            data(){ 
+                 return {msg:"点我啊"} 
+            }, 
+            // this.$attrs (v-bind) this.$listeners (v-on) 
+            //template:`<div><button @click="$listeners.click()"  @mouseup="$listeners.mouseup">{{msg}}</button></div>` 一个个传递方法
+            // template:`<div><button v-on="$listeners">{{msg}}</button></div>`,  // 把事件整体传入
+            // 触发自己身上的click事件
+            template:`<div><button @click="$emit('click')">点我啊</button></div>`
+        })
+        let vm = new Vue({ 
+            el:'#app',
+            methods:{
+                show(){
+                    alert(1)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"version":3,"file":"0.js","sources":["webpack:///./src/other.js"],"sourcesContent":["export default (a,b)=>{\n    return a+b +5 +6+10000+123\n}"],"mappings":";;;;;;;;;;AAAA;AAAA;AACA;AACA;;;;A","sourceRoot":""}
